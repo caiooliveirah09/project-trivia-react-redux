@@ -13,8 +13,8 @@ state = {
 }
 
 componentDidMount() {
-  // const token = JSON.parse(localStorage.getItem('token'));
-  this.getQuestions();
+  const token = JSON.parse(localStorage.getItem('token'));
+  this.getQuestions(token);
 }
 
 getQuestions = async (token) => {
