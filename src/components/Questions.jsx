@@ -2,6 +2,7 @@ import React from 'react';
 import PropTypes from 'prop-types';
 
 import '../styles/Questions.css';
+import { connect } from 'react-redux';
 import Buttons from './Buttons';
 
 class Questions extends React.Component {
@@ -15,7 +16,7 @@ class Questions extends React.Component {
   }
 
   createButtons = () => {
-    const { question } = this.props;
+    const { question, getClasses: { correctClass, wrongClass } } = this.props;
     const qtd = [...question.incorrect_answers, question.correct_answer];
     let answers = [...question.incorrect_answers, question.correct_answer];
     const index = () => Math.floor(Math.random() * answers.length);
@@ -23,22 +24,16 @@ class Questions extends React.Component {
       const controle = answers[index()];
       answers = answers.filter((answer) => answer !== controle);
       if (controle === question.correct_answer) {
+        // console.log('resposta Usuario: ', controle);
+        console.log('resposta certa: ', correctClass);
         return (
           <Buttons
             controle={ controle }
             testId="correct-answer"
             correctAnswer={ question.correct_answer }
             key={ key }
+            nameClass={ correctClass }
           />
-          // <button
-          //   className={ userReplied ? correctClass : wrongClass }
-          //   onClick={ (e) => this.handleClick(e) }
-          //   data-testid={ testId }
-          //   name={ controle }
-          //   type="button"
-          // >
-          //   { controle }
-          // </button>
         );
       }
       return (
@@ -47,6 +42,7 @@ class Questions extends React.Component {
           testId={ `wrong-answer-${question.incorrect_answers.indexOf(controle)}` }
           correctAnswer={ question.correct_answer }
           key={ key }
+          nomeClass={ wrongClass }
         />
 
       );
@@ -76,4 +72,8 @@ Questions.propTypes = ({
   question: PropTypes.object,
 }).isRequired;
 
-export default Questions;
+const mapStateToProps = (state) => ({
+  getClasses: state.player.classes,
+});
+
+export default connect(mapStateToProps)(Questions);

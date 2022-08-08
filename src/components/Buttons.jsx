@@ -4,33 +4,21 @@ import { connect } from 'react-redux';
 import { sendClassAction } from '../redux/actions';
 
 class Buttons extends React.Component {
-state = {
-  correctClass: '',
-  wrongClass: '',
-  userReplied: false,
-}
-
-handleClick = ({ target: { name } }) => {
-  const { correctAnswer, sendClasses } = this.props;
-  const correctClass = name === correctAnswer ? 'green' : 'red';
-  const wrongClass = name !== correctAnswer ? 'green' : 'red';
-  // this.setState({
-  //   correctClass,
-  //   wrongClass,
-  //   userReplied: true,
-  // });
+handleClick = () => {
+  const { sendClasses } = this.props;
+  const correctClass = 'green';
+  const wrongClass = 'red';
   sendClasses({ correctClass, wrongClass });
 }
 
 render() {
-  const { userReplied } = this.state;
   const { controle, correctAnswer,
     testId, getClasses: { correctClass, wrongClass } } = this.props;
+  console.log('resposta certa: ', correctAnswer);
   return (
     <button
-      className={ controle === correctAnswer
-        ? wrongClass : correctClass }
-      onClick={ (e) => this.handleClick(e) }
+      className={ controle === correctAnswer ? correctClass : wrongClass }
+      onClick={ () => this.handleClick() }
       data-testid={ testId }
       name={ controle }
       type="button"
