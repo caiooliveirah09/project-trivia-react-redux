@@ -2,7 +2,7 @@ import React from 'react';
 import { connect } from 'react-redux';
 import propTypes from 'prop-types';
 
-import { saveInfosAction } from '../redux/actions';
+import { saveInfosAction, fetchToken } from '../redux/actions';
 
 class Login extends React.Component {
   state = {
@@ -28,11 +28,20 @@ class Login extends React.Component {
     }
   }
 
-  saveInfos = () => {
-    const { saveInfosDispatch } = this.props;
+  saveInfos = async () => {
+    const { saveInfosDispatch, fetchTokenDispatch,
+      history: { push } } = this.props;
     const { name, gravatarEmail } = this.state;
 
     saveInfosDispatch(name, gravatarEmail);
+    const { token } = await fetchTokenDispatch();
+    localStorage.setItem('token', token);
+    push('/game');
+  }
+
+  toSettings = () => {
+    const { history: { push } } = this.props;
+    push('/configuracoes');
   }
 
   render() {
@@ -63,6 +72,13 @@ class Login extends React.Component {
         >
           Play
         </button>
+        <button
+          type="button"
+          data-testid="btn-settings"
+          onClick={ this.toSettings }
+        >
+          Configurações
+        </button>
       </form>
     );
   }
@@ -70,10 +86,20 @@ class Login extends React.Component {
 
 const mapDispatchToProps = (dispatch) => ({
   saveInfosDispatch: (name, email) => dispatch(saveInfosAction(name, email)),
+  fetchTokenDispatch: () => dispatch(fetchToken()),
+});
+
+const mapStateToProps = (state) => ({
+  token: state.player.token,
+  isFetch: state.player.isFetch,
 });
 
 Login.propTypes = {
   saveInfosDispatch: propTypes.func,
+  fetchTokenDispatch: propTypes.func,
+  push: propTypes.func,
+  token: propTypes.string,
+  isFetch: propTypes.bool,
 }.isRequired;
 
-export default connect(null, mapDispatchToProps)(Login);
+export default connect(mapStateToProps, mapDispatchToProps)(Login);
