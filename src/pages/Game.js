@@ -4,6 +4,7 @@ import { connect } from 'react-redux';
 
 import { fetchQuestions } from '../tests/helpers/fetchQuestions';
 import Questions from '../components/Questions';
+import Header from './Header';
 
 class Game extends React.Component {
 state = {
@@ -39,8 +40,8 @@ render() {
   const { questions: { results }, index, isFetched } = this.state;
   return (
     <div>
+      <Header />
       { isFetched && <Questions question={ results[index] } />}
-
     </div>
   );
 }
