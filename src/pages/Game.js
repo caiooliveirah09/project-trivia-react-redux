@@ -30,6 +30,7 @@ questionsValidation = () => {
   const { questions } = this.state;
   const { history } = this.props;
   const responseInvalid = 3;
+  console.log(questions);
   if (questions.response_code === responseInvalid) {
     localStorage.setItem('token', '');
     history.push('/');
