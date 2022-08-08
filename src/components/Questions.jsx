@@ -30,6 +30,15 @@ class Questions extends React.Component {
             correctAnswer={ question.correct_answer }
             key={ key }
           />
+          // <button
+          //   className={ userReplied ? correctClass : wrongClass }
+          //   onClick={ (e) => this.handleClick(e) }
+          //   data-testid={ testId }
+          //   name={ controle }
+          //   type="button"
+          // >
+          //   { controle }
+          // </button>
         );
       }
       return (

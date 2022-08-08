@@ -1,6 +1,7 @@
 export const SAVE_INFOS = 'SAVE_INFOS';
 export const GET_TOKEN = 'GET_TOKEN';
 export const WAIT_FETCH = 'WAIT_FETCH';
+export const SEND_CLASS = 'SEND_CLASS';
 
 export const saveInfosAction = (name, gravatarEmail) => ({
   type: SAVE_INFOS,
@@ -18,3 +19,9 @@ export function fetchToken() {
     .then((response) => response.json())
     .then((token) => dispatch(getToken(token.token)));
 }
+
+export const sendClassAction = (payload) => ({
+  type: SEND_CLASS,
+  payload,
+
+});

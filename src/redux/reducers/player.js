@@ -1,4 +1,4 @@
-import { GET_TOKEN, SAVE_INFOS } from '../actions';
+import { GET_TOKEN, SAVE_INFOS, SEND_CLASS } from '../actions';
 
 const INITIAL_STATE = {
   player: {
@@ -8,6 +8,7 @@ const INITIAL_STATE = {
   },
   token: '',
   isFetch: false,
+  classes: {},
 };
 
 const player = (state = INITIAL_STATE, action) => {
@@ -17,6 +18,7 @@ const player = (state = INITIAL_STATE, action) => {
     return { ...state, name, gravatarEmail };
   case GET_TOKEN:
     return { ...state, token, isFetch: false };
+  case SEND_CLASS: return { ...state, classes: action.payload };
   default:
     return state;
   }
