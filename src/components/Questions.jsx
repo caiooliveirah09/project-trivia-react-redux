@@ -6,7 +6,7 @@ import Buttons from './Buttons';
 
 class Questions extends React.Component {
   state = {
-    already: false,
+    isAlready: false,
     buttons: [],
   }
 
@@ -45,19 +45,19 @@ class Questions extends React.Component {
     const buttons = qtd.map((_, indexA) => button(indexA));
     this.setState({
       buttons,
-      already: true,
+      isAlready: true,
     });
   }
 
   render() {
-    const { buttons, already } = this.state;
+    const { buttons, isAlready } = this.state;
     const { question } = this.props;
     return (
       <div>
         <h2 data-testid="question-text">{question.question}</h2>
         <h3 data-testid="question-category">{ question.category }</h3>
 
-        {already && buttons.map((button) => button)}
+        {isAlready && buttons.map((button) => button)}
       </div>
     );
   }
