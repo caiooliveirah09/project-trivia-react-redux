@@ -1,47 +1,63 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 
+import '../styles/Questions.css';
+import Buttons from './Buttons';
+
 class Questions extends React.Component {
-  render() {
+  state = {
+    isAlready: false,
+    buttons: [],
+  }
+
+  componentDidMount() {
+    this.createButtons();
+  }
+
+  createButtons = () => {
     const { question } = this.props;
     const qtd = [...question.incorrect_answers, question.correct_answer];
     let answers = [...question.incorrect_answers, question.correct_answer];
     const index = () => Math.floor(Math.random() * answers.length);
-    function button(key) {
+    const button = (key) => {
       const controle = answers[index()];
       answers = answers.filter((answer) => answer !== controle);
       if (controle === question.correct_answer) {
         return (
-          <button
+          <Buttons
+            controle={ controle }
+            testId="correct-answer"
+            correctAnswer={ question.correct_answer }
             key={ key }
-            data-testid="correct-answer"
-            name={ controle }
-            type="button"
-          >
-            { controle }
-
-          </button>
-
+          />
         );
       }
       return (
-        <button
+        <Buttons
+          controle={ controle }
+          testId={ `wrong-answer-${question.incorrect_answers.indexOf(controle)}` }
+          correctAnswer={ question.correct_answer }
           key={ key }
-          data-testid={ `wrong-answer-${question.incorrect_answers.indexOf(controle)}` }
-          name={ controle }
-          type="button"
-        >
-          { controle }
+        />
 
-        </button>
       );
-    }
+    };
+    const buttons = qtd.map((_, indexA) => button(indexA));
+    this.setState({
+      buttons,
+      isAlready: true,
+    });
+  }
+
+  render() {
+    const { buttons, isAlready } = this.state;
+    const { question } = this.props;
     return (
       <div>
         <h2 data-testid="question-text">{question.question}</h2>
         <h3 data-testid="question-category">{ question.category }</h3>
 
-        {qtd.map((_, indexA) => button(indexA))}
+        {isAlready && buttons.map((button) => button)}
       </div>
     );
   }
