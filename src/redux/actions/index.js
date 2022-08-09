@@ -5,6 +5,22 @@ export const SEND_CLASS = 'SEND_CLASS';
 export const DECREMENT_TIME = 'DECREMENT_TIME';
 export const TOGGLE_DISABLE = 'TOGGLE_DISABLE';
 export const SET_SCORE = 'SET_SCORE';
+export const NEXT_QUESTION = 'NEXT_QUESTION';
+export const SET_BUTTONS = 'SET_BUTTONS';
+export const ACTIVATE_NEXT_BUTTON = 'ACTIVATE_NEXT_BUTTON';
+
+export const activateNextButtonAction = () => ({
+  type: ACTIVATE_NEXT_BUTTON,
+});
+
+export const setButtonsActions = (payload) => ({
+  type: SET_BUTTONS,
+  payload,
+});
+
+export const nextQuestionAction = () => ({
+  type: NEXT_QUESTION,
+});
 
 export const setScoreAction = (payload) => ({
   type: SET_SCORE,

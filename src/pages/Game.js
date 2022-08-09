@@ -5,11 +5,11 @@ import { connect } from 'react-redux';
 import { fetchQuestions } from '../tests/helpers/fetchQuestions';
 import Questions from '../components/Questions';
 import Header from './Header';
+import { nextQuestionAction } from '../redux/actions';
 
 class Game extends React.Component {
 state = {
   questions: { },
-  index: 0,
   isFetched: false,
 }
 
@@ -36,12 +36,32 @@ questionsValidation = () => {
   }
 }
 
+handleClick = () => {
+  const { nextQuestion, player: { index } } = this.props;
+  const MAX_INDEX = 4;
+  if (index !== MAX_INDEX) {
+    nextQuestion();
+  }
+}
+
 render() {
-  const { questions: { results }, index, isFetched } = this.state;
+  const { questions: { results }, isFetched } = this.state;
+  const { player: { index, nextButton } } = this.props;
+  const buttonNext = (
+    <button
+      type="button"
+      data-testid="btn-next"
+      onClick={ () => this.handleClick() }
+    >
+      Next
+
+    </button>
+  );
   return (
     <div>
       <Header />
       { isFetched && <Questions question={ results[index] } />}
+      { nextButton && buttonNext }
     </div>
   );
 }
@@ -55,4 +75,8 @@ const mapStateToProps = (state) => ({
   player: state.player,
 });
 
-export default connect(mapStateToProps)(Game);
+const mapDispatchToProps = (dispatch) => ({
+  nextQuestion: () => dispatch(nextQuestionAction()),
+});
+
+export default connect(mapStateToProps, mapDispatchToProps)(Game);
