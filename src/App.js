@@ -16,6 +16,7 @@ export default function App() {
         <Switch>
           <Route path="/configuracoes" component={ Configuracoes } />
           <Route path="/game" component={ Game } />
+          <Route path="/feedback" component={ Game } />
           <Route path="/" component={ Login } />
         </Switch>
       </header>

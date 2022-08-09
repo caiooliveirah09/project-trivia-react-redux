@@ -37,10 +37,12 @@ questionsValidation = () => {
 }
 
 handleClick = () => {
-  const { nextQuestion, player: { index } } = this.props;
+  const { nextQuestion, player: { index }, history: { push } } = this.props;
   const MAX_INDEX = 4;
   if (index !== MAX_INDEX) {
     nextQuestion();
+  } else {
+    push('/feedback');
   }
 }
 
@@ -69,6 +71,7 @@ render() {
 
 Game.propTypes = ({
   history: propTypes.objectOf(propTypes.any),
+  push: propTypes.func,
 }).isRequired;
 
 const mapStateToProps = (state) => ({

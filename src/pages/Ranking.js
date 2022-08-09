@@ -1,6 +1,6 @@
 import React from 'react';
 // import { connect } from 'react-redux';
-import PropTypes from 'prop-types';
+import propTypes from 'prop-types';
 
 class Ranking extends React.Component {
   render() {
@@ -21,7 +21,7 @@ class Ranking extends React.Component {
 }
 
 Ranking.propTypes = {
-  push: PropTypes.func,
+  push: propTypes.func,
 }.isRequired;
 
 export default Ranking;
