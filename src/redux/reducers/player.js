@@ -1,6 +1,7 @@
 import { ACTIVATE_NEXT_BUTTON, DECREMENT_TIME,
   GET_IMAGE, GET_TOKEN, NEXT_QUESTION, SAVE_INFOS,
-  SEND_CLASS, SET_BUTTONS, SET_SCORE, TOGGLE_DISABLE } from '../actions';
+  SEND_CLASS, SET_BUTTONS, SET_SCORE, TOGGLE_DISABLE,
+  COUNT_CORRECT_ANSWERS } from '../actions';
 
 const INITIAL_STATE = {
 
@@ -17,6 +18,7 @@ const INITIAL_STATE = {
   index: 0,
   buttons: [],
   nextButton: false,
+  counterAnswer: 0,
 };
 
 const player = (state = INITIAL_STATE, action) => {
@@ -43,6 +45,8 @@ const player = (state = INITIAL_STATE, action) => {
     return { ...state, buttons: payload };
   case ACTIVATE_NEXT_BUTTON:
     return { ...state, nextButton: true };
+  case COUNT_CORRECT_ANSWERS:
+    return { ...state, counterAnswer: state.counterAnswer + 1 };
   default:
     return state;
   }

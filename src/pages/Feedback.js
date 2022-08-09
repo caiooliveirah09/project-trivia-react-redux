@@ -1,10 +1,39 @@
 import React from 'react';
+import { connect } from 'react-redux';
+import propTypes from 'prop-types';
 import Header from './Header';
 
 class Feedback extends React.Component {
   render() {
-    return <Header />;
+    const { counterAnswer } = this.props;
+    const THREE = 3;
+    return (
+      <>
+        <Header />
+        {counterAnswer < THREE
+          ? (
+            <p
+              data-testId="feedback-text"
+            >
+              Could be better...
+
+            </p>)
+          : (
+            <p
+              data-testId="feedback-text"
+            >
+              Well Done!
+            </p>)}
+      </>);
   }
 }
 
-export default Feedback;
+const mapStateToProps = ({ player: { counterAnswer } }) => ({
+  counterAnswer,
+});
+
+Feedback.propTypes = {
+  counterAnswer: propTypes.number,
+}.isRequired;
+
+export default connect(mapStateToProps)(Feedback);

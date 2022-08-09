@@ -3,6 +3,7 @@ import { Route, Switch } from 'react-router-dom';
 
 import Configuracoes from './pages/Configuracoes';
 import Game from './pages/Game';
+import Feedback from './pages/Feedback';
 import logo from './trivia.png';
 import './App.css';
 import Login from './pages/Login';
@@ -16,7 +17,7 @@ export default function App() {
         <Switch>
           <Route path="/configuracoes" component={ Configuracoes } />
           <Route path="/game" component={ Game } />
-          <Route path="/feedback" component={ Game } />
+          <Route path="/feedback" component={ Feedback } />
           <Route path="/" component={ Login } />
         </Switch>
       </header>
