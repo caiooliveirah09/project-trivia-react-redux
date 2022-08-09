@@ -18,7 +18,7 @@ const INITIAL_STATE = {
   index: 0,
   buttons: [],
   nextButton: false,
-  counterAnswer: 0,
+  assertions: 0,
 };
 
 const player = (state = INITIAL_STATE, action) => {
@@ -54,7 +54,7 @@ const player = (state = INITIAL_STATE, action) => {
       isButtonDisable: true,
     };
   case COUNT_CORRECT_ANSWERS:
-    return { ...state, counterAnswer: state.counterAnswer + 1 };
+    return { ...state, assertions: state.assertions + 1 };
   default:
     return state;
   }
