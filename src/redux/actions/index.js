@@ -5,6 +5,7 @@ export const SEND_CLASS = 'SEND_CLASS';
 export const DECREMENT_TIME = 'DECREMENT_TIME';
 export const TOGGLE_DISABLE = 'TOGGLE_DISABLE';
 export const SET_SCORE = 'SET_SCORE';
+export const GET_IMAGE = 'GET_IMAGE';
 
 export const setScoreAction = (payload) => ({
   type: SET_SCORE,
@@ -39,5 +40,9 @@ export function fetchToken() {
 export const sendClassAction = (payload) => ({
   type: SEND_CLASS,
   payload,
+});
 
+export const getImage = (payload) => ({
+  type: GET_IMAGE,
+  payload,
 });

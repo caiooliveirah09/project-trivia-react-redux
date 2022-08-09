@@ -2,6 +2,7 @@ import React from 'react';
 import { connect } from 'react-redux';
 import md5 from 'crypto-js/md5';
 import PropTypes from 'prop-types';
+import { getImage } from '../redux/actions';
 
 class Header extends React.Component {
     state = {
@@ -12,14 +13,12 @@ class Header extends React.Component {
       this.gravatar();
     }
 
-    gravatar = async () => {
-      const { gravatarEmail } = this.props;
+    gravatar = () => {
+      const { gravatarEmail, getImageDispatch } = this.props;
       const hash = md5(gravatarEmail).toString();
       const requisicao = `https://www.gravatar.com/avatar/${hash}`;
-
-      const result = await fetch(hash);
-      console.log(result.url);
       this.setState({ imgSRC: requisicao });
+      getImageDispatch(requisicao);
     }
 
     render() {
@@ -48,4 +47,8 @@ const mapStateToProps = (state) => ({
   ...state.player,
 });
 
-export default connect(mapStateToProps)(Header);
+const mapDispatchToProps = (dispatch) => ({
+  getImageDispatch: (payload) => dispatch(getImage(payload)),
+});
+
+export default connect(mapStateToProps, mapDispatchToProps)(Header);
