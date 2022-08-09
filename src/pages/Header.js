@@ -24,7 +24,7 @@ class Header extends React.Component {
 
     render() {
       const { imgSRC } = this.state;
-      const { name } = this.props;
+      const { name, score } = this.props;
       return (
         <header>
           <img
@@ -33,7 +33,7 @@ class Header extends React.Component {
             data-testid="header-profile-picture"
           />
           <p data-testid="header-player-name">{ name }</p>
-          <p data-testid="header-score">0</p>
+          <p data-testid="header-score">{score}</p>
         </header>
       );
     }

@@ -1,12 +1,12 @@
 import { DECREMENT_TIME, GET_TOKEN, SAVE_INFOS,
-  SEND_CLASS, TOGGLE_DISABLE } from '../actions';
+  SEND_CLASS, SET_SCORE, TOGGLE_DISABLE } from '../actions';
 
 const INITIAL_STATE = {
-  player: {
-    name: '',
-    score: 0,
-    gravatarEmail: '',
-  },
+
+  name: '',
+  score: 0,
+  gravatarEmail: '',
+
   token: '',
   isFetch: false,
   classes: {},
@@ -15,7 +15,8 @@ const INITIAL_STATE = {
 };
 
 const player = (state = INITIAL_STATE, action) => {
-  const { name, gravatarEmail, token } = action;
+  const { name, gravatarEmail, token, payload } = action;
+  console.log(payload);
   switch (action.type) {
   case SAVE_INFOS:
     return { ...state, name, gravatarEmail };
@@ -27,6 +28,7 @@ const player = (state = INITIAL_STATE, action) => {
     return { ...state, timer: state.timer - 1 };
   case TOGGLE_DISABLE:
     return { ...state, isButtonDisable: !state.isButtonDisable };
+  case SET_SCORE: return { ...state, score: state.score + payload };
   default:
     return state;
   }
