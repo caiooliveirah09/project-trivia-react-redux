@@ -5,12 +5,18 @@ import Header from './Header';
 
 class Feedback extends React.Component {
   render() {
-    const { counterAnswer, history: { push } } = this.props;
+    const { assertions, score, history: { push } } = this.props;
     const THREE = 3;
     return (
       <>
         <Header />
-        {counterAnswer < THREE
+        <p data-testid="feedback-total-score">{ score }</p>
+        <p
+          data-testid="feedback-total-question"
+        >
+          {assertions}
+        </p>
+        {assertions < THREE
           ? (
             <p
               data-testid="feedback-text"
@@ -35,12 +41,14 @@ class Feedback extends React.Component {
   }
 }
 
-const mapStateToProps = ({ player: { counterAnswer } }) => ({
-  counterAnswer,
+const mapStateToProps = ({ player: { assertions, score } }) => ({
+  assertions,
+  score,
 });
 
 Feedback.propTypes = {
-  counterAnswer: propTypes.number,
+  assertions: propTypes.number,
+  score: propTypes.number,
 }.isRequired;
 
 export default connect(mapStateToProps)(Feedback);
