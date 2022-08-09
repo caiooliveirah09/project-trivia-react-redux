@@ -1,7 +1,8 @@
 import React from 'react';
 import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
-import { decrementTimeAction, toggleDisableAction } from '../redux/actions';
+import { activateNextButtonAction,
+  decrementTimeAction, toggleDisableAction } from '../redux/actions';
 
 class Timer extends React.Component {
   componentDidMount() {
@@ -52,6 +53,7 @@ const mapStateToProps = (state) => ({
 const mapDispatchToProps = (dispatch) => ({
   decrementTime: () => dispatch(decrementTimeAction()),
   disableButtons: () => dispatch(toggleDisableAction()),
+  activateNextButton: () => dispatch(activateNextButtonAction()),
 });
 
 export default connect(mapStateToProps, mapDispatchToProps)(Timer);

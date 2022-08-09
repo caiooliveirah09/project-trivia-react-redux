@@ -5,21 +5,24 @@ import '../styles/Questions.css';
 import { connect } from 'react-redux';
 import Buttons from './Buttons';
 import Timer from './Timer';
+import { setButtonsActions } from '../redux/actions';
 
 class Questions extends React.Component {
-  state = {
-    isAlready: false,
-    buttons: [],
-  }
-
   componentDidMount() {
     this.createButtons();
+  }
+
+  componentDidUpdate(prevProps) {
+    const { player: { index } } = this.props;
+    if (index !== prevProps.player.index) {
+      this.createButtons();
+    }
   }
 
   createButtons = () => {
     const { question } = this.props;
     if (question) {
-      const { getClasses: { correctClass, wrongClass } } = this.props;
+      const { getClasses: { correctClass, wrongClass }, setButtons } = this.props;
       const qtd = [...question.incorrect_answers, question.correct_answer];
       let answers = [...question.incorrect_answers, question.correct_answer];
       const index = () => Math.floor(Math.random() * answers.length);
@@ -51,23 +54,19 @@ class Questions extends React.Component {
         );
       };
       const buttons = qtd.map((_, indexA) => button(indexA));
-      this.setState({
-        buttons,
-        isAlready: true,
-      });
+      setButtons(buttons);
     }
   }
 
   render() {
-    const { buttons, isAlready } = this.state;
-    const { question } = this.props;
+    const { question, player: { buttons } } = this.props;
     return (
       <div>
         { question && <Timer />}
         { question && <h2 data-testid="question-text">{question.question}</h2>}
         {question && <h3 data-testid="question-category">{ question.category }</h3>}
         <div data-testid="answer-options">
-          {isAlready && buttons.map((button) => button)}
+          {question && buttons.map((button) => button)}
 
         </div>
       </div>
@@ -81,6 +80,11 @@ Questions.propTypes = ({
 
 const mapStateToProps = (state) => ({
   getClasses: state.player.classes,
+  player: state.player,
 });
 
-export default connect(mapStateToProps)(Questions);
+const mapDispatchToProps = (dispatch) => ({
+  setButtons: (payload) => dispatch(setButtonsActions(payload)),
+});
+
+export default connect(mapStateToProps, mapDispatchToProps)(Questions);

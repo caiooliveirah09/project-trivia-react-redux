@@ -1,15 +1,19 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
-import { sendClassAction, setScoreAction } from '../redux/actions';
+import { activateNextButtonAction,
+  sendClassAction, setScoreAction } from '../redux/actions';
 
 class Buttons extends React.Component {
 handleClick = ({ target: { name } }) => {
-  const { sendClasses } = this.props;
+  const { sendClasses, activateNextButton, player: { index } } = this.props;
   const correctClass = 'green';
   const wrongClass = 'red';
   sendClasses({ correctClass, wrongClass });
   this.sumScore(name);
+  if (index === 0) {
+    activateNextButton();
+  }
 }
 
 sumScore = (name) => {
@@ -63,12 +67,14 @@ Buttons.propTypes = ({
 const mapDispatchToProps = (dispatch) => ({
   sendClasses: (payload) => dispatch(sendClassAction(payload)),
   setScore: (payload) => dispatch(setScoreAction(payload)),
+  activateNextButton: () => dispatch(activateNextButtonAction()),
 });
 
 const mapStateToProps = (state) => ({
   getClasses: state.player.classes,
   isDisabled: state.player.isButtonDisable,
   timer: state.player.timer,
+  player: state.player,
 });
 
 export default connect(mapStateToProps, mapDispatchToProps)(Buttons);
