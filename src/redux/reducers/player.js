@@ -1,4 +1,4 @@
-import { ACTIVATE_NEXT_BUTTON, DECREMENT_TIME, GET_TOKEN, NEXT_QUESTION, SAVE_INFOS,
+import { ACTIVATE_NEXT_BUTTON, DECREMENT_TIME, GET_IMAGE, GET_TOKEN, NEXT_QUESTION, SAVE_INFOS,
   SEND_CLASS, SET_BUTTONS, SET_SCORE, TOGGLE_DISABLE } from '../actions';
 
 const INITIAL_STATE = {
@@ -6,6 +6,7 @@ const INITIAL_STATE = {
   name: '',
   score: 0,
   gravatarEmail: '',
+  imageSRC: '',
 
   token: '',
   isFetch: false,
@@ -31,6 +32,8 @@ const player = (state = INITIAL_STATE, action) => {
     return { ...state, timer: state.timer - 1 };
   case TOGGLE_DISABLE:
     return { ...state, isButtonDisable: !state.isButtonDisable };
+  case GET_IMAGE:
+    return { ...state, imageSRC: action.payload };
   case SET_SCORE:
     return { ...state, score: state.score + payload };
   case NEXT_QUESTION:
