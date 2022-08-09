@@ -13,13 +13,14 @@ handleClick = () => {
 
 render() {
   const { controle, correctAnswer,
-    testId, getClasses: { correctClass, wrongClass } } = this.props;
+    testId, getClasses: { correctClass, wrongClass }, isDisabled } = this.props;
   console.log('resposta certa: ', correctAnswer);
   return (
     <button
       className={ controle === correctAnswer ? correctClass : wrongClass }
       onClick={ () => this.handleClick() }
       data-testid={ testId }
+      disabled={ isDisabled }
       name={ controle }
       type="button"
     >
@@ -33,6 +34,7 @@ Buttons.propTypes = ({
   correctAnswer: PropTypes.string,
   controle: PropTypes.string,
   testId: PropTypes.string,
+  isDisabled: PropTypes.bool,
 }).isRequired;
 
 const mapDispatchToProps = (dispatch) => ({
@@ -41,6 +43,7 @@ const mapDispatchToProps = (dispatch) => ({
 
 const mapStateToProps = (state) => ({
   getClasses: state.player.classes,
+  isDisabled: state.player.isButtonDisable,
 });
 
 export default connect(mapStateToProps, mapDispatchToProps)(Buttons);

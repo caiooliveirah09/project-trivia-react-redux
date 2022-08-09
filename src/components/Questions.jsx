@@ -4,6 +4,7 @@ import PropTypes from 'prop-types';
 import '../styles/Questions.css';
 import { connect } from 'react-redux';
 import Buttons from './Buttons';
+import Timer from './Timer';
 
 class Questions extends React.Component {
   state = {
@@ -26,7 +27,6 @@ class Questions extends React.Component {
         const controle = answers[index()];
         answers = answers.filter((answer) => answer !== controle);
         if (controle === question.correct_answer) {
-        // console.log('resposta Usuario: ', controle);
           console.log('resposta certa: ', correctClass);
           return (
             <Buttons
@@ -62,6 +62,7 @@ class Questions extends React.Component {
     const { question } = this.props;
     return (
       <div>
+        { question && <Timer />}
         { question && <h2 data-testid="question-text">{question.question}</h2>}
         {question && <h3 data-testid="question-category">{ question.category }</h3>}
         <div data-testid="answer-options">

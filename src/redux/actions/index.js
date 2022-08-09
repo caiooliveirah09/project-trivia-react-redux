@@ -2,6 +2,16 @@ export const SAVE_INFOS = 'SAVE_INFOS';
 export const GET_TOKEN = 'GET_TOKEN';
 export const WAIT_FETCH = 'WAIT_FETCH';
 export const SEND_CLASS = 'SEND_CLASS';
+export const DECREMENT_TIME = 'DECREMENT_TIME';
+export const TOGGLE_DISABLE = 'TOGGLE_DISABLE';
+
+export const toggleDisableAction = () => ({
+  type: TOGGLE_DISABLE,
+});
+
+export const decrementTimeAction = () => ({
+  type: DECREMENT_TIME,
+});
 
 export const saveInfosAction = (name, gravatarEmail) => ({
   type: SAVE_INFOS,
