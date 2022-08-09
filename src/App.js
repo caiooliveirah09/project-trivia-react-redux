@@ -7,7 +7,6 @@ import Feedback from './pages/Feedback';
 import logo from './trivia.png';
 import './App.css';
 import Login from './pages/Login';
-import Feedback from './pages/Feedback';
 
 export default function App() {
   return (

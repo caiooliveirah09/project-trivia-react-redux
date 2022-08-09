@@ -5,7 +5,7 @@ import Header from './Header';
 
 class Feedback extends React.Component {
   render() {
-    const { counterAnswer } = this.props;
+    const { counterAnswer, history: { push } } = this.props;
     const THREE = 3;
     return (
       <>
@@ -13,17 +13,24 @@ class Feedback extends React.Component {
         {counterAnswer < THREE
           ? (
             <p
-              data-testId="feedback-text"
+              data-testid="feedback-text"
             >
               Could be better...
 
             </p>)
           : (
             <p
-              data-testId="feedback-text"
+              data-testid="feedback-text"
             >
               Well Done!
             </p>)}
+        <button
+          type="button"
+          data-testid="btn-play-again"
+          onClick={ () => push('/') }
+        >
+          Home
+        </button>
       </>);
   }
 }
