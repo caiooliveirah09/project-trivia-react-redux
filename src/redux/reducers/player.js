@@ -34,17 +34,25 @@ const player = (state = INITIAL_STATE, action) => {
   case DECREMENT_TIME:
     return { ...state, timer: state.timer - 1 };
   case TOGGLE_DISABLE:
-    return { ...state, isButtonDisable: !state.isButtonDisable };
+    return { ...state, isButtonDisable: true, nextButton: true };
   case GET_IMAGE:
     return { ...state, imageSRC: action.payload };
   case SET_SCORE:
     return { ...state, score: state.score + payload };
   case NEXT_QUESTION:
-    return { ...state, index: state.index + 1 };
+    return { ...state,
+      index: state.index + 1,
+      isButtonDisable: false,
+      classes: {},
+      timer: 30,
+    };
   case SET_BUTTONS:
     return { ...state, buttons: payload };
   case ACTIVATE_NEXT_BUTTON:
-    return { ...state, nextButton: true };
+    return { ...state,
+      nextButton: true,
+      isButtonDisable: true,
+    };
   case COUNT_CORRECT_ANSWERS:
     return { ...state, counterAnswer: state.counterAnswer + 1 };
   default:
