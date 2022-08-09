@@ -2,7 +2,7 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import { activateNextButtonAction,
-  sendClassAction, setScoreAction } from '../redux/actions';
+  sendClassAction, setScoreAction, countCorrectAnswersAction } from '../redux/actions';
 
 class Buttons extends React.Component {
 handleClick = ({ target: { name } }) => {
@@ -17,7 +17,8 @@ handleClick = ({ target: { name } }) => {
 }
 
 sumScore = (name) => {
-  const { timer, correctAnswer, difficulty, setScore } = this.props;
+  const { timer, correctAnswer,
+    difficulty, setScore, countCorrectAnswers } = this.props;
   let difficult = 0;
   const three = 3;
   switch (difficulty) {
@@ -35,13 +36,13 @@ sumScore = (name) => {
     const ten = 10;
     const score = ten + (timer * difficult);
     setScore(score);
+    countCorrectAnswers();
   }
 }
 
 render() {
   const { controle, correctAnswer,
     testId, getClasses: { correctClass, wrongClass }, isDisabled } = this.props;
-  console.log(correctAnswer);
   return (
     <button
       className={ controle === correctAnswer ? correctClass : wrongClass }
@@ -68,6 +69,7 @@ const mapDispatchToProps = (dispatch) => ({
   sendClasses: (payload) => dispatch(sendClassAction(payload)),
   setScore: (payload) => dispatch(setScoreAction(payload)),
   activateNextButton: () => dispatch(activateNextButtonAction()),
+  countCorrectAnswers: () => dispatch(countCorrectAnswersAction()),
 });
 
 const mapStateToProps = (state) => ({

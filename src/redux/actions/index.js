@@ -9,6 +9,7 @@ export const GET_IMAGE = 'GET_IMAGE';
 export const NEXT_QUESTION = 'NEXT_QUESTION';
 export const SET_BUTTONS = 'SET_BUTTONS';
 export const ACTIVATE_NEXT_BUTTON = 'ACTIVATE_NEXT_BUTTON';
+export const COUNT_CORRECT_ANSWERS = 'COUNT_CORRECT_ANSWERS';
 
 export const activateNextButtonAction = () => ({
   type: ACTIVATE_NEXT_BUTTON,
@@ -62,3 +63,5 @@ export const getImage = (payload) => ({
   type: GET_IMAGE,
   payload,
 });
+
+export const countCorrectAnswersAction = () => ({ type: COUNT_CORRECT_ANSWERS });
