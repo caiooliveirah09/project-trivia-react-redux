@@ -4,9 +4,11 @@ import { Route, Switch } from 'react-router-dom';
 import Configuracoes from './pages/Configuracoes';
 import Game from './pages/Game';
 import Feedback from './pages/Feedback';
+import Ranking from './pages/Ranking';
+import Login from './pages/Login';
+
 import logo from './trivia.png';
 import './App.css';
-import Login from './pages/Login';
 
 export default function App() {
   return (
@@ -18,6 +20,7 @@ export default function App() {
           <Route path="/configuracoes" component={ Configuracoes } />
           <Route path="/game" component={ Game } />
           <Route path="/feedback" component={ Feedback } />
+          <Route path="/ranking" component={ Ranking } />
           <Route path="/" component={ Login } />
         </Switch>
       </header>
