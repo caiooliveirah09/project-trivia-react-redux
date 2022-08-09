@@ -4,6 +4,12 @@ export const WAIT_FETCH = 'WAIT_FETCH';
 export const SEND_CLASS = 'SEND_CLASS';
 export const DECREMENT_TIME = 'DECREMENT_TIME';
 export const TOGGLE_DISABLE = 'TOGGLE_DISABLE';
+export const SET_SCORE = 'SET_SCORE';
+
+export const setScoreAction = (payload) => ({
+  type: SET_SCORE,
+  payload,
+});
 
 export const toggleDisableAction = () => ({
   type: TOGGLE_DISABLE,

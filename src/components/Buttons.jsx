@@ -1,24 +1,47 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
-import { sendClassAction } from '../redux/actions';
+import { sendClassAction, setScoreAction } from '../redux/actions';
 
 class Buttons extends React.Component {
-handleClick = () => {
+handleClick = ({ target: { name } }) => {
   const { sendClasses } = this.props;
   const correctClass = 'green';
   const wrongClass = 'red';
   sendClasses({ correctClass, wrongClass });
+  this.sumScore(name);
+}
+
+sumScore = (name) => {
+  const { timer, correctAnswer, difficulty, setScore } = this.props;
+  let difficult = 0;
+  const three = 3;
+  switch (difficulty) {
+  case 'easy': difficult = 1;
+    break;
+  case 'medium': difficult = 2;
+    break;
+  case 'hard': difficult = three;
+    break;
+
+  default: difficult = 0;
+    break;
+  }
+  if (name === correctAnswer) {
+    const ten = 10;
+    const score = ten + (timer * difficult);
+    setScore(score);
+  }
 }
 
 render() {
   const { controle, correctAnswer,
     testId, getClasses: { correctClass, wrongClass }, isDisabled } = this.props;
-  console.log('resposta certa: ', correctAnswer);
+  console.log(correctAnswer);
   return (
     <button
       className={ controle === correctAnswer ? correctClass : wrongClass }
-      onClick={ () => this.handleClick() }
+      onClick={ (e) => this.handleClick(e) }
       data-testid={ testId }
       disabled={ isDisabled }
       name={ controle }
@@ -39,11 +62,13 @@ Buttons.propTypes = ({
 
 const mapDispatchToProps = (dispatch) => ({
   sendClasses: (payload) => dispatch(sendClassAction(payload)),
+  setScore: (payload) => dispatch(setScoreAction(payload)),
 });
 
 const mapStateToProps = (state) => ({
   getClasses: state.player.classes,
   isDisabled: state.player.isButtonDisable,
+  timer: state.player.timer,
 });
 
 export default connect(mapStateToProps, mapDispatchToProps)(Buttons);

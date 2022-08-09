@@ -27,10 +27,10 @@ class Questions extends React.Component {
         const controle = answers[index()];
         answers = answers.filter((answer) => answer !== controle);
         if (controle === question.correct_answer) {
-          console.log('resposta certa: ', correctClass);
           return (
             <Buttons
               controle={ controle }
+              difficulty={ question.difficulty }
               testId="correct-answer"
               correctAnswer={ question.correct_answer }
               key={ key }
@@ -41,6 +41,7 @@ class Questions extends React.Component {
         return (
           <Buttons
             controle={ controle }
+            difficulty={ question.difficulty }
             testId={ `wrong-answer-${question.incorrect_answers.indexOf(controle)}` }
             correctAnswer={ question.correct_answer }
             key={ key }
