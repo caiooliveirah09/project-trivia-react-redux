@@ -6,6 +6,7 @@ import Game from './pages/Game';
 import logo from './trivia.png';
 import './App.css';
 import Login from './pages/Login';
+import Feedback from './pages/Feedback';
 
 export default function App() {
   return (
@@ -16,7 +17,7 @@ export default function App() {
         <Switch>
           <Route path="/configuracoes" component={ Configuracoes } />
           <Route path="/game" component={ Game } />
-          <Route path="/feedback" component={ Game } />
+          <Route path="/feedback" component={ Feedback } />
           <Route path="/" component={ Login } />
         </Switch>
       </header>
