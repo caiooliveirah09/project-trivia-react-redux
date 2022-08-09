@@ -5,7 +5,7 @@ import Header from './Header';
 
 class Feedback extends React.Component {
   render() {
-    const { assertions, score } = this.props;
+    const { assertions, score, history: { push } } = this.props;
     const THREE = 3;
     return (
       <>
@@ -30,6 +30,13 @@ class Feedback extends React.Component {
             >
               Well Done!
             </p>)}
+        <button
+          type="button"
+          data-testid="btn-play-again"
+          onClick={ () => push('/') }
+        >
+          Home
+        </button>
       </>);
   }
 }
