@@ -37,11 +37,22 @@ questionsValidation = () => {
 }
 
 handleClick = () => {
-  const { nextQuestion, player: { index }, history: { push } } = this.props;
+  const { nextQuestion, player: { index }, history: { push },
+    name, imageSRC, score } = this.props;
   const MAX_INDEX = 4;
   if (index !== MAX_INDEX) {
     nextQuestion();
   } else {
+    if (localStorage.getItem('listaRanking')) {
+      const array = [...JSON.parse(localStorage
+        .getItem('listaRanking')), { imageSRC, name, score }];
+      localStorage.setItem('listaRanking', JSON.stringify(array));
+    } else {
+      const array2 = [{ imageSRC, name, score }];
+      localStorage.setItem('listaRanking', JSON.stringify(array2));
+    }
+
+    console.log();
     push('/feedback');
   }
 }
@@ -72,10 +83,16 @@ render() {
 Game.propTypes = ({
   history: propTypes.objectOf(propTypes.any),
   push: propTypes.func,
+  name: propTypes.string,
+  imageSRC: propTypes.string,
+  score: propTypes.number,
 }).isRequired;
 
 const mapStateToProps = (state) => ({
   player: state.player,
+  imageSRC: state.player.imageSRC,
+  name: state.player.name,
+  score: state.player.score,
 });
 
 const mapDispatchToProps = (dispatch) => ({
