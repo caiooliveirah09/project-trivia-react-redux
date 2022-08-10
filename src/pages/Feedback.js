@@ -37,6 +37,13 @@ class Feedback extends React.Component {
         >
           Home
         </button>
+        <button
+          type="button"
+          data-testid="btn-ranking"
+          onClick={ () => push('/ranking') }
+        >
+          Ranking
+        </button>
       </>);
   }
 }
