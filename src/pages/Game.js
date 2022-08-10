@@ -5,7 +5,7 @@ import { connect } from 'react-redux';
 import { fetchQuestions } from '../tests/helpers/fetchQuestions';
 import Questions from '../components/Questions';
 import Header from './Header';
-import { nextQuestionAction } from '../redux/actions';
+import { nextQuestionAction, resetStateAction } from '../redux/actions';
 
 class Game extends React.Component {
 state = {
@@ -14,6 +14,8 @@ state = {
 }
 
 componentDidMount() {
+  const { resetStore } = this.props;
+  resetStore();
   const token = localStorage.getItem('token');
   this.getQuestions(token);
 }
@@ -97,6 +99,7 @@ const mapStateToProps = (state) => ({
 
 const mapDispatchToProps = (dispatch) => ({
   nextQuestion: () => dispatch(nextQuestionAction()),
+  resetStore: () => dispatch(resetStateAction()),
 });
 
 export default connect(mapStateToProps, mapDispatchToProps)(Game);

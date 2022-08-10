@@ -1,7 +1,8 @@
 import { ACTIVATE_NEXT_BUTTON, DECREMENT_TIME,
   GET_IMAGE, GET_TOKEN, NEXT_QUESTION, SAVE_INFOS,
   SEND_CLASS, SET_BUTTONS, SET_SCORE, TOGGLE_DISABLE,
-  COUNT_CORRECT_ANSWERS } from '../actions';
+  COUNT_CORRECT_ANSWERS,
+  RESET_STATE } from '../actions';
 
 const INITIAL_STATE = {
 
@@ -55,6 +56,18 @@ const player = (state = INITIAL_STATE, action) => {
     };
   case COUNT_CORRECT_ANSWERS:
     return { ...state, assertions: state.assertions + 1 };
+  case RESET_STATE:
+    return { ...state,
+      isFetch: false,
+      classes: {},
+      timer: 30,
+      isButtonDisable: false,
+      index: 0,
+      buttons: [],
+      nextButton: false,
+      score: 0,
+      assertions: 0,
+    };
   default:
     return state;
   }

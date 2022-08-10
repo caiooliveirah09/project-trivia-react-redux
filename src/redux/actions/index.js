@@ -10,6 +10,11 @@ export const NEXT_QUESTION = 'NEXT_QUESTION';
 export const SET_BUTTONS = 'SET_BUTTONS';
 export const ACTIVATE_NEXT_BUTTON = 'ACTIVATE_NEXT_BUTTON';
 export const COUNT_CORRECT_ANSWERS = 'COUNT_CORRECT_ANSWERS';
+export const RESET_STATE = 'RESET_STATE';
+
+export const resetStateAction = () => ({
+  type: RESET_STATE,
+});
 
 export const activateNextButtonAction = () => ({
   type: ACTIVATE_NEXT_BUTTON,
