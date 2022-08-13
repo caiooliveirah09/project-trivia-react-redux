@@ -53,8 +53,6 @@ handleClick = () => {
       const array2 = [{ imageSRC, name, score }];
       localStorage.setItem('listaRanking', JSON.stringify(array2));
     }
-
-    console.log();
     push('/feedback');
   }
 }
