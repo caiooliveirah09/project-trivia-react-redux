@@ -16,7 +16,6 @@ describe('test the ranking page', () => {
     json: async () => fetchQuestionsMock,
   }));
 
-
   localStorage.setItem('listaRanking', JSON.stringify(players));
 
   test('test if the score goes from highest to lowest', async () => {
