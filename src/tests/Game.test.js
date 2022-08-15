@@ -102,7 +102,6 @@ describe('test the game page', () => {
     await waitFor(() => expect(fetch).toHaveBeenCalled());
     expect(history.location.pathname).toBe('/game');
     expect(window.localStorage.getItem('listaRanking')).toEqual(null)
-    console.log(window.localStorage.getItem('listaRanking'));
     const correctAnswer1 = screen.getByTestId('correct-answer');
     userEvent.click(correctAnswer1);
     const next1 = screen.getByTestId('btn-next');
@@ -131,5 +130,24 @@ describe('test the game page', () => {
     expect(listaRanking[0].name).toBe('test');
     expect(listaRanking[0].score).toBe(380);
   })
+  test('6- test if question buttons disable after 30 seconds', async () => {
+    const initialState = {
+      player: {
+        name:"test",
+        assertions: 3,
+        score: 2,
+        gravatarEmail:"test@test",
+        imageSRC: "https://www.gravatar.com/avatar/d41d8cd98f00b204e9800998ecf8427e",
+      },
+    };
+    const route = '/game';
+    renderWithRouterAndRedux(<App />, initialState, route);
+    await waitFor(() => expect(fetch).toHaveBeenCalled());
+    const correctAnswer1 = screen.getByTestId('correct-answer');
+    await waitFor(
+      () => expect(correctAnswer1).toBeDisabled(), { timeout: 31000 }
+    );
+    const btnNext = screen.getByTestId('btn-next');
+    expect(btnNext).toBeInTheDocument();
+  })
 })
-
