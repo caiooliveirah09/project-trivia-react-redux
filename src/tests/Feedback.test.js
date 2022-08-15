@@ -4,7 +4,7 @@ import { screen, waitFor } from '@testing-library/react';
 import Feedback from '../pages/Feedback'
 import userEvent from '@testing-library/user-event';
 import App from '../App';
-import fetchQuestionsMock from './helpers/teste'
+import fetchQuestionsMock from './helpers/teste';
 
 describe('test the feedback page', () => {
   
@@ -35,7 +35,6 @@ describe('test the feedback page', () => {
     const btnRanking = screen.getByTestId('btn-ranking');
     expect(btnRanking).toBeInTheDocument();
     expect(btnRanking).toHaveTextContent('Ranking');
-    // const logo = screen.getByRole("img", { name: /logo/i });
   })
   test('2 - test if you have 5 hits it appears Well Done!', () => {
     const initialState = {

@@ -1,11 +1,10 @@
 import React from 'react';
 import renderWithRouterAndRedux from './helpers/renderWithRouterAndRedux';
 import userEvent from '@testing-library/user-event';
-import { findByTestId, render, screen, waitFor } from '@testing-library/react';
-import App from '../App'
-import Game from '../pages/Game'
-import Login from '../pages/Login'
-import fetchQuestionsMock from './helpers/teste'
+import { screen, waitFor } from '@testing-library/react';
+import App from '../App';
+import Game from '../pages/Game';
+import fetchQuestionsMock from './helpers/teste';
 
 const fakeLocalStorage = (function() {
   let store = {};
@@ -70,7 +69,6 @@ describe('test the game page', () => {
     const wrongAnswer0 = await screen.findByTestId('wrong-answer-0');
     userEvent.click(wrongAnswer0);
     expect(wrongAnswer0).toHaveAttribute('class','red');
-    // const buttonPlay = screen.getByTestId('btn-play');
   })
   test('3 - if you get the question right, it changes to green color class', async () => {
     renderWithRouterAndRedux(<Game />);

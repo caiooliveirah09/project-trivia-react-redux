@@ -1,11 +1,9 @@
 import React from 'react';
 import renderWithRouterAndRedux from './helpers/renderWithRouterAndRedux';
 import userEvent from '@testing-library/user-event';
-import { findByTestId, render, screen, waitFor } from '@testing-library/react';
+import { screen, waitFor } from '@testing-library/react';
 import App from '../App'
-import Game from '../pages/Game'
-import Login from '../pages/Login'
-import fetchQuestionsMock, { fetchQuestionsMockFailed } from './helpers/teste'
+import { fetchQuestionsMockFailed } from './helpers/teste';
 
 
 describe('test the game page fail', () => {

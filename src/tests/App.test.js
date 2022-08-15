@@ -2,7 +2,7 @@ import React from 'react';
 import renderWithRouterAndRedux from './helpers/renderWithRouterAndRedux';
 import App from '../App';
 import { screen, waitFor } from '@testing-library/react';
-import fetchQuestionsMock from './helpers/teste'
+import fetchQuestionsMock from './helpers/teste';
 import userEvent from '@testing-library/user-event';
 
 describe('test the app', () => {
